@@ -1,0 +1,26 @@
+{
+  "name": "whizbang",
+  "version": "1.0.0",
+  "description": "A place for my messy ideas to incubate and grow until they prove brilliant and useful.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jehoshua02/whizbang.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jehoshua02/whizbang/issues"
+  },
+  "homepage": "https://github.com/jehoshua02/whizbang",
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "should": "^5.0.0"
+  }
+}
