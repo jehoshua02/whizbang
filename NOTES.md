@@ -108,3 +108,12 @@ book.validate();
 
 It's just dreamcode at this point, but it's much better than the blobby mess we
 had previously.
+
+# TODO
++ Throwing and Catching.
++ Structure for validation messages.
++ Implement Validator.
++ Abstract Book.validate to a base class.
++ Plugability: Define custom validators.
++ Built in validators.
++ Maybe write real code instead of notes?
