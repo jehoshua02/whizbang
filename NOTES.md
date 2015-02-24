@@ -68,6 +68,8 @@ reusable objects and functions:
 
 __Book.js__
 ```javascript
+var Validator = require('validator').Validator;
+
 var validator = new Validator();
 validator.property('title')
   .type('string')
