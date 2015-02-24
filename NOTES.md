@@ -57,54 +57,52 @@ There are several problems I see already with the way this is going:
 1. Repetitive code. I literally copied and pasted the code and changed the
   property name for validation of the other.
 2. Only one validation message. I want all of them.
-3. With any non-trivial, real-life object, this validation script will become
-  long, messy, and error prone, especially with objects having nested objects
-  that will also require validation.
-4. We still have to add in normalization (trimming strings, casting values to
-  the correct data types, capitalization, filtering, etc).
+3. Maintenance. With any non-trivial, real-life object, this validation script
+  will become long, messy, and error prone, especially with objects having
+  nested objects that will also require validation.
+4. Normalization. We still have to add in normalization (trimming strings,
+  casting values to the correct data types, capitalization, filtering, etc).
 
 To solve the problem of repetitive code, we can abstract some things into
-reusable functions:
+reusable objects and functions:
 
+__Book.js__
 ```javascript
-var validator = new Validator(); /* [1] */
-validator.property('title') /* [2] */
-  .type('string') /* [3] */
-  .required() /* [4] */
-validator.property('author') /* [5] */
+var validator = new Validator();
+validator.property('title')
+  .type('string')
+  .required()
+validator.property('author')
   .type('string')
   .required()
 
-var Book = function (props) { /* [6] */
+
+var Book = function (props) {
   this.props = props;
 };
 
 Book.prototype = {
   validator: validator,
   validate: function () {
-    this.validator.validate(this.props); /* [7] */
+    this.validator.validate(this.props);
   }
 };
 
-var book = new Book({ /* [8] */
+module.exports = Book;
+```
+
+__example.js__
+```javascript
+var Book = require('./Book');
+
+var book = new Book({
   title: 'Validation the Right Way',
   author: 'Joshua Stoutenburg',
   pages: 20
 });
 
-book.validate(); /* [9] */
+book.validate();
 ```
-
-1. We instantiate a new validator using a constructor defined somewhere.
-2. We define a ruleset for a property.
-3. We indicate it should be of type 'string'.
-4. We indicate the property is required (whatever that means).
-5. We do something similar for another property.
-6. We define the Book object constructor.
-7. We wire the Book object to the validator.
-8. We instantiate a book with the props.
-9. We call validate.
 
 It's just dreamcode at this point, but it's much better than the blobby mess we
 had previously.
-
