@@ -209,40 +209,4 @@ describe('Validator', function () {
       });
     });
   });
-
-  describe('.isFloat(value)', function () {
-    it('should return true only for floats', function () {
-      // arrange
-      var scenarios = [
-        {
-          expected: true,
-          values: [ 1.1, 3.14, -5.674, 1.50, 1/3 ]
-        },
-        {
-          expected: false,
-          values: [
-            Infinity, -Infinity,
-            1, 2774, 0, -4875,
-            'string',
-            true, false,
-            /^regex$/,
-            {},
-            [],
-            null, undefined,
-            NaN
-          ]
-        }
-      ];
-
-      scenarios.forEach(function (scenario) {
-        scenario.values.forEach(function (value) {
-          // act
-          var actual = Validator.isFloat(value);
-
-          // assert
-          actual.should.equal(scenario.expected);
-        });
-      });
-    });
-  });
 });
